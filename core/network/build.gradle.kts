@@ -1,43 +1,32 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.vanluong.network"
-    compileSdk = 35
-
-    defaultConfig {
-        minSdk = 25
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+    namespace = "com.vanluong.core.network"
 }
 
 dependencies {
+    implementation(project(":core:model"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // network
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.sandwich)
+
+    // coroutines
+    implementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
+
+    // moshi
+    implementation(libs.moshi)
+    ksp(libs.moshi.codegen)
+
+    // hilt
+    implementation(libs.android.hilt)
+    ksp(libs.hilt.compiler)
 }

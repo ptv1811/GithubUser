@@ -60,7 +60,7 @@ dependencies {
 
     // network
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.logging.interceptor)
 
     // Room
@@ -69,10 +69,10 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     // coroutines
-    implementation(libs.couroutines.android)
+    implementation(libs.coroutines.android)
 
-    // gson
-    implementation(libs.gson)
+    // moshi
+    implementation(libs.moshi)
 
     // Jetpack Datastore
     implementation(libs.datastore)
