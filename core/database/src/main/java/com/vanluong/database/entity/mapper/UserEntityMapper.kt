@@ -31,4 +31,12 @@ object UserEntityMapper {
             following = entity.following
         )
     }
+
+    fun List<GithubUser>.toEntityList(): List<UserEntity> {
+        return map { fromGithubUserToEntity(it) }
+    }
+
+    fun List<UserEntity>.toDomainList(): List<GithubUser> {
+        return map { fromEntityToGithubUser(it) }
+    }
 }

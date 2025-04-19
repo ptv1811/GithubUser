@@ -32,6 +32,7 @@ dependencies {
 
     // Paging
     implementation(libs.paging)
+    implementation(libs.androidx.room.paging)
 
     // Moshi
     implementation(libs.moshi)
@@ -40,4 +41,9 @@ dependencies {
     // Hilt
     implementation(libs.android.hilt)
     ksp(libs.hilt.compiler)
+
+    // Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    implementation(libs.core.ktx)
 }
