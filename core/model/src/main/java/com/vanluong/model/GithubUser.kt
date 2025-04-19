@@ -12,6 +12,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class GithubUser(
+    @field:Json(name = "id") val id: Long,
     @field:Json(name = "login") val login: String,
     @field:Json(name = "avatar_url") val avatarUrl: String,
     @field:Json(name = "html_url") val htmlUrl: String,

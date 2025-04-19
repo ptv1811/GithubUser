@@ -1,4 +1,4 @@
-package com.vanluong.database
+package com.vanluong.common
 
 import org.junit.Test
 
