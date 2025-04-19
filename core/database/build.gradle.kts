@@ -1,43 +1,43 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.vanluong.database"
-    compileSdk = 35
-
     defaultConfig {
-        minSdk = 25
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        // The schemas directory contains a schema file for each version of the Room database.
+        // This is required to enable Room auto migrations.
+        // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
     }
 }
 
 dependencies {
+    implementation(project(":core:model"))
+    implementation(project(":core:testing"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Coroutines
+    implementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
+
+    // Room
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.arch.core)
+
+    // Paging
+    implementation(libs.paging)
+
+    // Moshi
+    implementation(libs.moshi)
+    ksp(libs.moshi.codegen)
+
+    // Hilt
+    implementation(libs.android.hilt)
+    ksp(libs.hilt.compiler)
 }
