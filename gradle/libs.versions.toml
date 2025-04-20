@@ -1,4 +1,5 @@
 [versions]
+kspVersion = "4.14.2"
 targetSdk = "35"
 jvmBytecode = "17"
 
@@ -12,7 +13,7 @@ coroutines = "1.6.0"
 datastore = "1.1.1"
 espressoCore = "3.6.1"
 glide = "4.12.0"
-hiltCore = "2.46"
+hiltCore = "2.56"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.1.20"
@@ -51,6 +52,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 hilt-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "hiltCore" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltCore" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "kspVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
