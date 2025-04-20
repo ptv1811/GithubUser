@@ -38,3 +38,5 @@ include(":core:database")
 include(":core:model")
 include(":core:testing")
 include(":core:data")
+
+include(":features:home")

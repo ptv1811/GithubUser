@@ -1,6 +1,5 @@
 package com.vanluong.data.repository.home
 
-import androidx.paging.PagingSource
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
@@ -29,15 +28,12 @@ class HomeRepositoryImpl @Inject constructor(
         since: Int,
         perPage: Int
     ): Flow<Result<List<GithubUser>>> = flow<Result<List<GithubUser>>> {
-        val githubUser = githubUserDao.getUsersPaged().load(
-            PagingSource.LoadParams.Refresh(
-                key = since,
-                loadSize = perPage,
-                placeholdersEnabled = false
-            )
-        )
-        if (githubUser is PagingSource.LoadResult.Page) {
-            emit(Result.Success(githubUser.data.toDomainList()))
+
+
+        val githubUser = githubUserDao.getUsersPaged(perPage, since)
+
+        if (githubUser.isNotEmpty()) {
+            emit(Result.Success(githubUser.toDomainList()))
         } else {
             githubClient.getListUser(since, perPage)
                 .suspendOnSuccess {

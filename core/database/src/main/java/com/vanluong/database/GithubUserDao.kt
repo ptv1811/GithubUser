@@ -1,6 +1,5 @@
 package com.vanluong.database
 
-import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,6 +15,6 @@ interface GithubUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsers(userList: List<UserEntity>)
 
-    @Query("SELECT * FROM UserEntity ORDER BY id ASC")
-    fun getUsersPaged(): PagingSource<Int, UserEntity>
+    @Query("SELECT * FROM UserEntity ORDER BY id ASC LIMIT :limit OFFSET :offset")
+    fun getUsersPaged(limit: Int, offset: Int): List<UserEntity>
 }
