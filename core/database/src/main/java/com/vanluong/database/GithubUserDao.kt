@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.vanluong.database.entity.UserEntity
 
 /**
@@ -17,4 +18,10 @@ interface GithubUserDao {
 
     @Query("SELECT * FROM UserEntity ORDER BY id ASC LIMIT :limit OFFSET :offset")
     fun getUsersPaged(limit: Int, offset: Int): List<UserEntity>
+
+    @Query("SELECT * FROM UserEntity WHERE id = :id")
+    fun getUserById(id: Long): UserEntity
+
+    @Update
+    fun updateUser(userEntity: UserEntity)
 }

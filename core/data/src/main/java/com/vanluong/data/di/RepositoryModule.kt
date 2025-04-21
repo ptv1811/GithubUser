@@ -1,5 +1,7 @@
 package com.vanluong.data.di
 
+import com.vanluong.data.repository.details.UserDetailRepository
+import com.vanluong.data.repository.details.UserDetailRepositoryImpl
 import com.vanluong.data.repository.home.HomeRepository
 import com.vanluong.data.repository.home.HomeRepositoryImpl
 import dagger.Module
@@ -18,4 +20,8 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideHomeRepository(impl: HomeRepositoryImpl): HomeRepository = impl
+
+    @Provides
+    @ViewModelScoped
+    fun provideUserDetailRepository(impl: UserDetailRepositoryImpl): UserDetailRepository = impl
 }

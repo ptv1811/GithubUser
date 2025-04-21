@@ -28,8 +28,6 @@ class HomeRepositoryImpl @Inject constructor(
         since: Int,
         perPage: Int
     ): Flow<Result<List<GithubUser>>> = flow<Result<List<GithubUser>>> {
-
-
         val githubUser = githubUserDao.getUsersPaged(perPage, since)
 
         if (githubUser.isNotEmpty()) {
@@ -47,6 +45,5 @@ class HomeRepositoryImpl @Inject constructor(
                     emit(Result.DataError(message()))
                 }
         }
-
     }.flowOn(Dispatchers.IO)
 }
