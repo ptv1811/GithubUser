@@ -28,6 +28,7 @@ retrofit = "2.9.0"
 robolectric = "4.14.1"
 room = "2.6.1"
 sandwich = "2.1.1"
+shimmerVersion = "0.5.0"
 coreKtxVersion = "1.6.1"
 
 [libraries]
@@ -48,6 +49,7 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+facebook-shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmerVersion" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 hilt-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "hiltCore" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltCore" }

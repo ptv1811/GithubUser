@@ -10,8 +10,10 @@ import com.vanluong.userlist.databinding.UserDetailItemBinding
  */
 sealed class UserDetailItem {
     data class Location(val location: String) : UserDetailItem()
-    data class Followers(val count: Int) : UserDetailItem()
-    data class Following(val count: Int) : UserDetailItem()
+    data class
+    Followers(val count: String) : UserDetailItem()
+
+    data class Following(val count: String) : UserDetailItem()
 }
 
 class GithubUserDetailAdapter : BaseRecyclerViewAdapter<UserDetailItem, UserDetailItemBinding>(
@@ -23,16 +25,19 @@ class GithubUserDetailAdapter : BaseRecyclerViewAdapter<UserDetailItem, UserDeta
                     // TODO: Use string resource
                     tvTitle.text = "Location"
                     tvDescription.text = item.location
+                    ivIcon.setImageResource(R.drawable.ic_location)
                 }
 
                 is UserDetailItem.Followers -> {
                     tvTitle.text = "Followers"
-                    tvDescription.text = item.count.toString()
+                    tvDescription.text = item.count
+                    ivIcon.setImageResource(R.drawable.ic_followers)
                 }
 
                 is UserDetailItem.Following -> {
                     tvTitle.text = "Following"
-                    tvDescription.text = item.count.toString()
+                    tvDescription.text = item.count
+                    ivIcon.setImageResource(R.drawable.ic_following)
                 }
             }
         }

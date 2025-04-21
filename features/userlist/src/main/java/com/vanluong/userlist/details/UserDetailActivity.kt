@@ -3,6 +3,7 @@ package com.vanluong.userlist.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +46,14 @@ class UserDetailActivity : BaseActivity<ActivityUserDetailBinding>(R.layout.acti
                 userDetailViewModel.user.collectLatest { result ->
                     when (result) {
                         is Result.Loading -> {
+                            binding {
+                                slUserDetail.apply {
+                                    visibility = View.VISIBLE
+                                    startShimmer()
+                                }
 
+                                svUserDetail.visibility = View.GONE
+                            }
                         }
 
                         is Result.Success -> {
@@ -57,6 +65,11 @@ class UserDetailActivity : BaseActivity<ActivityUserDetailBinding>(R.layout.acti
                                         .into(ivUserAvatar)
 
                                     githubUserDetailAdapter.setItems(mapUserToDetailItems(user))
+                                    svUserDetail.visibility = View.VISIBLE
+                                    slUserDetail.apply {
+                                        stopShimmer()
+                                        visibility = View.GONE
+                                    }
                                 }
                             }
 
@@ -80,9 +93,9 @@ class UserDetailActivity : BaseActivity<ActivityUserDetailBinding>(R.layout.acti
 
     private fun mapUserToDetailItems(user: GithubUser): List<UserDetailItem> {
         val list = mutableListOf<UserDetailItem>()
-        user.location?.let { list.add(UserDetailItem.Location(it)) }
-        user.followers?.let { list.add(UserDetailItem.Followers(it)) }
-        user.following?.let { list.add(UserDetailItem.Following(it)) }
+        list.add(UserDetailItem.Location(user.location ?: "N/A"))
+        list.add(UserDetailItem.Followers(if (user.followers != null) user.followers.toString() else "N/A"))
+        list.add(UserDetailItem.Following(if (user.following != null) user.following.toString() else "N/A"))
         return list
     }
 

@@ -1,6 +1,7 @@
 package com.vanluong.userlist.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,9 +24,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         githubUserAdapter = GithubUserAdapter(this)
-        setSupportActionBar(binding.toolbar)
 
         binding {
+            slHome.apply {
+                startShimmer()
+                visibility = View.VISIBLE
+            }
+
             rvUsers.apply {
                 setHasFixedSize(true)
                 adapter = githubUserAdapter
@@ -42,6 +47,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
                         }
                     }
                 })
+
+                visibility = View.GONE
             }
         }
 
@@ -49,6 +56,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.userList.collectLatest { userList ->
                     githubUserAdapter.setItems(userList)
+                    binding {
+                        rvUsers.visibility = View.VISIBLE
+                        slHome.apply {
+                            stopShimmer()
+                            visibility = View.GONE
+                        }
+                    }
                 }
             }
         }

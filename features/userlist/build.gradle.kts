@@ -26,6 +26,8 @@ dependencies {
     implementation(libs.android.lifecycle.savedstate)
     implementation(libs.recyclerView)
 
+    implementation(libs.facebook.shimmer)
+
     // Hilt
     implementation(libs.android.hilt)
     kapt(libs.hilt.compiler)
