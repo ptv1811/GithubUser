@@ -14,6 +14,6 @@ data class UserEntity(
     val avatarUrl: String,
     val htmlURL: String,
     var location: String?,
-    var followers: Int = 0,
-    var following: Int = 0
+    var followers: Int?,
+    var following: Int?
 )

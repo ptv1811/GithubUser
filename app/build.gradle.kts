@@ -41,8 +41,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":features:home"))
 
+    implementation(project(":features:userlist"))
     implementation(project(":core:data"))
     implementation(project(":core:model"))
     implementation(project(":core:common"))

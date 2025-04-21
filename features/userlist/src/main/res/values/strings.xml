@@ -1,0 +1,7 @@
+<resources>
+    <string name="user_name_placeholder">Van Luong</string>
+    <string name="github_link_placeholder">https://github.com/ltvan</string>
+
+    <string name="home_title">All Users</string>
+    <string name="detail_title">Details</string>
+</resources>

@@ -16,7 +16,7 @@
         android:theme="@style/Theme.GithubUser"
         tools:targetApi="31">
         <activity
-            android:name="com.vanluong.home.HomeActivity"
+            android:name="com.vanluong.userlist.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

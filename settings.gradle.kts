@@ -39,4 +39,4 @@ include(":core:model")
 include(":core:testing")
 include(":core:data")
 
-include(":features:home")
+include(":features:userlist")
