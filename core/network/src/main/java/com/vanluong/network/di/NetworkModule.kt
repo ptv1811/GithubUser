@@ -16,6 +16,8 @@ import javax.inject.Singleton
 /**
  * Created by van.luong
  * on 18,April,2025
+ *
+ * This Hilt module provides the necessary dependencies for network operations.
  */
 @Module
 @InstallIn(SingletonComponent::class)

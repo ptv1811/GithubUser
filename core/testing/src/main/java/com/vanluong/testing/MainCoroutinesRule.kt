@@ -13,6 +13,8 @@ import org.junit.runner.Description
 /**
  * Created by van.luong
  * on 18,April,2025
+ *
+ * Test rule to set up the main dispatcher for coroutines in tests.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainCoroutinesRule(

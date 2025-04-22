@@ -3,6 +3,8 @@ package com.vanluong.common
 /**
  * Created by van.luong
  * on 20,April,2025
+ *
+ * Represent the result of a network operation.
  */
 sealed class Result<T>(
     val data: T? = null,

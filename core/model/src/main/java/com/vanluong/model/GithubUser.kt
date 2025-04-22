@@ -8,6 +8,8 @@ import kotlinx.parcelize.Parcelize
 /**
  * Created by van.luong
  * on 18,April,2025
+ *
+ * Model class representing a Github user.
  */
 @Parcelize
 @JsonClass(generateAdapter = true)

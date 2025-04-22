@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by van.luong
  * on 20,April,2025
+ *
+ * Base RecyclerView adapter class that provides data binding functionality.
  */
 open class BaseRecyclerViewAdapter<T : Any, VDB : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
