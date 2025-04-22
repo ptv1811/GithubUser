@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -75,8 +76,21 @@ class UserDetailActivity : BaseActivity<ActivityUserDetailBinding>(R.layout.acti
 
                         }
 
-                        else -> {
+                        is Result.DataError -> {
+                            result.errorMessage?.let { error ->
+                                AlertDialog.Builder(this@UserDetailActivity)
+                                    .setTitle("Error")
+                                    .setMessage(error)
+                                    .setPositiveButton("OK") { dialog, _ ->
+                                        dialog.dismiss()
+                                        finish()
+                                    }
+                                    .show()
+                            }
+                        }
 
+                        else -> {
+                            // Do nothing
                         }
                     }
                 }
