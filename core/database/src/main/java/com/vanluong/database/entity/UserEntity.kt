@@ -15,5 +15,7 @@ data class UserEntity(
     val htmlURL: String,
     var location: String?,
     var followers: Int?,
-    var following: Int?
+    var following: Int?,
+
+    var hasDetails: Boolean = false //  track if we've fetched details
 )

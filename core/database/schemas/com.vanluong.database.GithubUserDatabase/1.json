@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c26edb470fbe46f81286e96dabb1eb4c",
+    "identityHash": "e65b941eb1ebfafc25b78a966c60e8c2",
     "entities": [
       {
         "tableName": "UserEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `login` TEXT NOT NULL, `avatarUrl` TEXT NOT NULL, `htmlURL` TEXT NOT NULL, `location` TEXT, `followers` INTEGER, `following` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `login` TEXT NOT NULL, `avatarUrl` TEXT NOT NULL, `htmlURL` TEXT NOT NULL, `location` TEXT, `followers` INTEGER, `following` INTEGER, `hasDetails` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,6 +49,12 @@
             "columnName": "following",
             "affinity": "INTEGER",
             "notNull": false
+          },
+          {
+            "fieldPath": "hasDetails",
+            "columnName": "hasDetails",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -64,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c26edb470fbe46f81286e96dabb1eb4c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e65b941eb1ebfafc25b78a966c60e8c2')"
     ]
   }
 }
