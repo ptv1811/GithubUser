@@ -57,16 +57,6 @@
 
     -   **Testing**: JUnit, [Turbine](https://github.com/cashapp/turbine) for Flow testing
 
-🧱 Code Structure
-------------------
--   📄 **HomeActivity**: Handles the display of the GitHub user list and manages pagination and error dialogs.  
-
--   📄 **HomeViewModel**: Manages the state and data for HomeActivity. Fetches data from the repository and handles errors using SharedFlow.  
-
--   📄 **GithubUserDao**: Provides database operations for storing and retrieving GitHub user data.  
-
--   📄 **UserEntityMapper**: Maps between UserEntity (database model) and GithubUser (domain model).
-
 📄 License
 ----------
 
