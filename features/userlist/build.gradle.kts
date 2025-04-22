@@ -18,6 +18,11 @@ android {
 dependencies {
     implementation(project(":core:data"))
 
+    // Module for unit testing
+    testImplementation(project(":core:testing"))
+    testImplementation(project(":core:network"))
+    testImplementation(project(":core:database"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +50,9 @@ dependencies {
     // moshi
     implementation(libs.moshi)
     ksp(libs.moshi.codegen)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.turbine)
 }

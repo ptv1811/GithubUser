@@ -6,8 +6,8 @@ import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.vanluong.common.Result
 import com.vanluong.database.GithubUserDao
-import com.vanluong.database.entity.mapper.UserEntityMapper.toDomainList
-import com.vanluong.database.entity.mapper.UserEntityMapper.toEntityList
+import com.vanluong.database.entity.mapper.toDomainList
+import com.vanluong.database.entity.mapper.toEntityList
 import com.vanluong.model.GithubUser
 import com.vanluong.network.service.GithubClient
 import kotlinx.coroutines.Dispatchers

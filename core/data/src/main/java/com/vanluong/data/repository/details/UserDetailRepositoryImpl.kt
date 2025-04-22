@@ -6,7 +6,8 @@ import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.vanluong.common.Result
 import com.vanluong.database.GithubUserDao
-import com.vanluong.database.entity.mapper.UserEntityMapper
+import com.vanluong.database.entity.mapper.toEntity
+import com.vanluong.database.entity.mapper.toGithubUser
 import com.vanluong.model.GithubUser
 import com.vanluong.network.service.GithubClient
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class UserDetailRepositoryImpl @Inject constructor(
         // Check if the user is already in the database
         val userEntity = githubUserDao.getUserById(user.id)
         if (userEntity.location != null && userEntity.followers != null && userEntity.following != null) {
-            emit(Result.Success(UserEntityMapper.fromEntityToGithubUser(userEntity)))
+            emit(Result.Success(userEntity.toGithubUser()))
             return@flow
         }
 
@@ -42,7 +43,7 @@ class UserDetailRepositoryImpl @Inject constructor(
                     followers = data.followers
                     following = data.following
                 }
-                githubUserDao.updateUser(UserEntityMapper.fromGithubUserToEntity(user))
+                githubUserDao.updateUser(user.toEntity())
                 emit(Result.Success(user))
             }
             .suspendOnError {

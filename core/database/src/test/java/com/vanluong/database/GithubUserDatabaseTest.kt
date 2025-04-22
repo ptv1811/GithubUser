@@ -3,7 +3,7 @@ package com.vanluong.database
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.vanluong.database.entity.mapper.UserEntityMapper.toEntityList
+import com.vanluong.database.entity.mapper.toEntityList
 import com.vanluong.testing.MockDataUtil
 import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.test.runTest
