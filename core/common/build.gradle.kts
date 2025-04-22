@@ -21,4 +21,8 @@ dependencies {
     // moshi
     implementation(libs.moshi)
     ksp(libs.moshi.codegen)
+
+    // testing
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
 }

@@ -9,7 +9,7 @@ import org.json.JSONObject
  * on 20,April,2025
  */
 interface JSONAble {
-    fun <T> JSONAble.toJSON(clazz: Class<T>): JSONObject? {
+    fun <T> toJSON(clazz: Class<T>): JSONObject? {
         if (!clazz.isInstance(this)) return null
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -19,8 +19,8 @@ interface JSONAble {
         return JSONObject(jsonString)
     }
 
-    fun <T> JSONAble.toJSONString(clazz: Class<T>): String? {
-        return toJSON(clazz)?.toString(4) ?: this.toString()
+    fun <T> toJSONString(clazz: Class<T>): String? {
+        return toJSON(clazz)?.toString(4)
     }
 }
 
@@ -33,5 +33,9 @@ inline fun <reified T> String.fromJson(): T? {
         .add(KotlinJsonAdapterFactory())
         .build()
     val adapter = moshi.adapter(T::class.java)
-    return adapter.fromJson(this)
+    return try {
+        adapter.fromJson(this)
+    } catch (e: Exception) {
+        null
+    }
 }
