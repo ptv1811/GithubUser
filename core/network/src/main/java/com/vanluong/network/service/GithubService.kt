@@ -9,6 +9,8 @@ import retrofit2.http.Query
 /**
  * Created by van.luong
  * on 18,April,2025
+ *
+ * This interface defines the Github API endpoints for fetching user data.
  */
 interface GithubService {
     /**

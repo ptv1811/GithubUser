@@ -19,6 +19,8 @@ import javax.inject.Inject
 /**
  * Created by van.luong
  * on 21,April,2025
+ *
+ * Implementation of UserDetailRepository.
  */
 class UserDetailRepositoryImpl @Inject constructor(
     private val githubClient: GithubClient,

@@ -7,6 +7,8 @@ import com.vanluong.database.entity.UserEntity
 /**
  * Created by van.luong
  * on 19,April,2025
+ *
+ * Database class for Github User.
  */
 @Database(
     entities = [UserEntity::class],

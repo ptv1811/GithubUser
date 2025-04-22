@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Created by van.luong
  * on 21,April,2025
+ *
+ * This interface is used for fetching Github User details
  */
 interface UserDetailRepository {
     /**

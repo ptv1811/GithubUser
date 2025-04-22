@@ -6,6 +6,9 @@ import com.vanluong.model.GithubUser
 /**
  * Created by van.luong
  * on 19,April,2025
+ *
+ * Extension functions to map between [GithubUser] and [UserEntity].
+ * because they are in separated modules.
  */
 fun GithubUser.toEntity(): UserEntity {
     return UserEntity(

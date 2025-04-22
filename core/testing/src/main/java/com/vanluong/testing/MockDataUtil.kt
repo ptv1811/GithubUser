@@ -5,6 +5,8 @@ import com.vanluong.model.GithubUser
 /**
  * Created by van.luong
  * on 19,April,2025
+ *
+ * Utility class to generate mock data for testing purposes.
  */
 object MockDataUtil {
     fun mockGithubUserList(): List<GithubUser> {

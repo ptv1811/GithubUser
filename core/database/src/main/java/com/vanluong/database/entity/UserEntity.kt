@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 /**
  * Created by van.luong
  * on 19,April,2025
+ *
+ * Entity class for User to store in the database.
  */
 @Entity
 data class UserEntity(
