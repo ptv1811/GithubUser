@@ -1,6 +1,8 @@
 package com.vanluong.userlist.home
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -43,6 +45,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
                             (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
                         if (!homeViewModel.isLoading.value && lastVisibleItem + 5 >= totalItemCount) {
+                            Log.d("TAG", "onScrolled: $lastVisibleItem")
+                            Log.d("TAG", "onScrolled: $totalItemCount")
                             homeViewModel.fetchNextPage()
                         }
                     }
@@ -53,15 +57,31 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.userList.collectLatest { userList ->
-                    githubUserAdapter.setItems(userList)
-                    binding {
-                        rvUsers.visibility = View.VISIBLE
-                        slHome.apply {
-                            stopShimmer()
-                            visibility = View.GONE
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    homeViewModel.userList.collectLatest { userList ->
+                        githubUserAdapter.setItems(userList)
+                        binding {
+                            rvUsers.visibility = View.VISIBLE
+                            slHome.apply {
+                                stopShimmer()
+                                visibility = View.GONE
+                            }
                         }
+                    }
+                }
+            }
+
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    homeViewModel.errorMessage.collectLatest { error ->
+                        AlertDialog.Builder(this@HomeActivity)
+                            .setTitle("Error")
+                            .setMessage(error)
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
                     }
                 }
             }

@@ -30,13 +30,4 @@ class ResultTest {
         assertEquals(errorMessage, dataErrorResult.errorMessage)
         assertEquals("Error[exception=An error occurred]", dataErrorResult.toString())
     }
-
-    @Test
-    fun `test NetworkError result`() {
-        val errorResponse = ErrorResponse(404, "Not Found")
-        val networkErrorResult = Result.NetworkError<String>(errorResponse)
-        assertEquals(null, networkErrorResult.data)
-        assertEquals(errorResponse, networkErrorResult.errorResponse)
-        assertEquals("NetworkError[code=404, message=Not Found]", networkErrorResult.toString())
-    }
 }

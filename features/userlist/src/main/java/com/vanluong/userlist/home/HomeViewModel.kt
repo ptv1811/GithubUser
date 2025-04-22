@@ -2,10 +2,13 @@ package com.vanluong.userlist.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vanluong.common.Result
 import com.vanluong.data.repository.home.HomeRepository
 import com.vanluong.model.GithubUser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -26,6 +29,9 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
+    private val _errorMessage = MutableSharedFlow<String?>(0)
+    val errorMessage: SharedFlow<String?> = _errorMessage
+
     private var since = 0
     private val pageSize = 20
 
@@ -37,22 +43,30 @@ class HomeViewModel @Inject constructor(
 
         repository.fetchGithubUsers(since, pageSize)
             .onEach { result ->
-                if (result.data == null) {
-                    _isLoading.value = false
-                    return@onEach
+                when (result) {
+                    is Result.DataError -> {
+                        _isLoading.value = false
+                        // Handle error
+                        _errorMessage.emit(result.errorMessage)
+                    }
+
+                    is Result.Success -> {
+                        // We have to create new array list because Kotlin MutableStateFlow does not emit same reference of list
+                        val newUserList = ArrayList(_userList.value)
+                        newUserList.addAll(result.data!!)
+
+                        _userList.value = newUserList
+
+                        /*
+                        * We have to set since to the last user id because some of the Ids has been removed so it is not incremental
+                         */
+                        since += result.data!!.last().id.toInt()
+                        _isLoading.value = false
+                    }
+
+                    else -> {
+                    }
                 }
-
-                // We have to create new array list because Kotlin MutableStateFlow does not emit same reference of list
-                val newUserList = ArrayList(_userList.value)
-                newUserList.addAll(result.data!!)
-
-                _userList.value = newUserList
-
-                /*
-                * We have to set since to the last user id because some of the Ids has been removed so it is not incremental
-                 */
-                since += result.data!!.last().id.toInt()
-                _isLoading.value = false
             }
             .collect()
     }
