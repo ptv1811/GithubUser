@@ -17,6 +17,15 @@ object MockDataUtil {
                 "Plumas County, California, USA",
                 66,
                 15
+            ),
+            GithubUser(
+                102,
+                "BrianTheCoder",
+                "https://avatars.githubusercontent.com/u/102?v=4",
+                "https://github.com/BrianTheCoder",
+                "Santa Monica,CA",
+                105,
+                32
             )
         )
     }
