@@ -30,10 +30,11 @@ class UserDetailRepositoryImpl @Inject constructor(
         emit(Result.Loading())
 
         // Check if the user is already in the database
-        val userEntity = githubUserDao.getUserById(user.id)
-        if (userEntity.location != null && userEntity.followers != null && userEntity.following != null) {
-            emit(Result.Success(userEntity.toGithubUser()))
-            return@flow
+        githubUserDao.getUserById(user.id)?.let { userEntity ->
+            if (userEntity.hasDetails) {
+                emit(Result.Success(userEntity.toGithubUser()))
+                return@flow
+            }
         }
 
         githubClient.getUserInfo(user.login)
@@ -43,7 +44,9 @@ class UserDetailRepositoryImpl @Inject constructor(
                     followers = data.followers
                     following = data.following
                 }
-                githubUserDao.updateUser(user.toEntity())
+                githubUserDao.updateUser(user.toEntity().apply {
+                    hasDetails = true
+                })
                 emit(Result.Success(user))
             }
             .suspendOnError {

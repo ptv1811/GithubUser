@@ -20,7 +20,7 @@ interface GithubUserDao {
     fun getUsersPaged(limit: Int, offset: Int): List<UserEntity>
 
     @Query("SELECT * FROM UserEntity WHERE id = :id")
-    fun getUserById(id: Long): UserEntity
+    fun getUserById(id: Long): UserEntity?
 
     @Update
     fun updateUser(userEntity: UserEntity)
