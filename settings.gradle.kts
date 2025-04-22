@@ -11,6 +11,16 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+plugins {
+    id("com.android.settings") version "8.9.1"
+}
+
+android {
+    minSdk = 25
+    compileSdk = 35
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,3 +31,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "GithubUser"
 include(":app")
+
+include(":core:common")
+include(":core:network")
+include(":core:database")
+include(":core:model")
+include(":core:testing")
+include(":core:data")
+
+include(":features:userlist")
