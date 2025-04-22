@@ -7,6 +7,10 @@ plugins {
 
 android {
     namespace = "com.vanluong.model"
+
+    testOptions {
+        unitTests.isReturnDefaultValues = false
+    }
 }
 
 dependencies {

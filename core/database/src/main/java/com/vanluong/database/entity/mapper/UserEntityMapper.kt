@@ -7,36 +7,34 @@ import com.vanluong.model.GithubUser
  * Created by van.luong
  * on 19,April,2025
  */
-object UserEntityMapper {
-    fun fromGithubUserToEntity(user: GithubUser): UserEntity {
-        return UserEntity(
-            id = user.id,
-            login = user.login,
-            avatarUrl = user.avatarUrl,
-            htmlURL = user.htmlUrl,
-            location = user.location,
-            followers = user.followers,
-            following = user.following
-        )
-    }
+fun GithubUser.toEntity(): UserEntity {
+    return UserEntity(
+        id = this.id,
+        login = this.login,
+        avatarUrl = this.avatarUrl,
+        htmlURL = this.htmlUrl,
+        location = this.location,
+        followers = this.followers,
+        following = this.following
+    )
+}
 
-    fun fromEntityToGithubUser(entity: UserEntity): GithubUser {
-        return GithubUser(
-            id = entity.id,
-            login = entity.login,
-            avatarUrl = entity.avatarUrl,
-            htmlUrl = entity.htmlURL,
-            location = entity.location,
-            followers = entity.followers,
-            following = entity.following
-        )
-    }
+fun UserEntity.toGithubUser(): GithubUser {
+    return GithubUser(
+        id = this.id,
+        login = this.login,
+        avatarUrl = this.avatarUrl,
+        htmlUrl = this.htmlURL,
+        location = this.location,
+        followers = this.followers,
+        following = this.following
+    )
+}
 
-    fun List<GithubUser>.toEntityList(): List<UserEntity> {
-        return map { fromGithubUserToEntity(it) }
-    }
+fun List<GithubUser>.toEntityList(): List<UserEntity> {
+    return map { it.toEntity() }
+}
 
-    fun List<UserEntity>.toDomainList(): List<GithubUser> {
-        return map { fromEntityToGithubUser(it) }
-    }
+fun List<UserEntity>.toDomainList(): List<GithubUser> {
+    return map { it.toGithubUser() }
 }
